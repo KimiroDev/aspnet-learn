@@ -1,10 +1,11 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Ceva cu pizza";
+    TimeSpan daysinbuisniess = DateTime.Now - new DateTime(2018, 8, 14);
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Contoso Pizza</h1>
+    <p class="lead">Welcome! days in buisniess: @Convert.ToInt32(daysinbuisniess.TotalDays)</p>
 </div>
