@@ -1,41 +1,23 @@
-name: Deploy ASP.NET App
+name: Build ASP.NET App
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+    - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
 
-    - name: Publish app
-      run: |
-        dotnet restore
-        dotnet publish -c Release -o publish
+    - run: dotnet publish -c Release -o publish
 
-    - name: Copy files to server
-      uses: appleboy/scp-action@v0.1.7
+    - uses: actions/upload-artifact@v4
       with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        source: "publish/*"
-        target: "/var/www/ContosoPizza"
-
-    - name: Restart service
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        script: |
-          sudo systemctl restart contosopizza
+        name: contosopizza
+        path: publish
