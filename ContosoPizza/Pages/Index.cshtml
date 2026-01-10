@@ -3,9 +3,57 @@
 @{
     ViewData["Title"] = "Ceva cu pizza";
     TimeSpan daysinbuisniess = DateTime.Now - new DateTime(2018, 8, 14);
+    DateTime dateValue = DateTime.Now;
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Contoso Pizza</h1>
     <p class="lead">Welcome! days in buisniess: @Convert.ToInt32(daysinbuisniess.TotalDays)</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="time">Time</th>
+                <th data-day="1">Monday</th>
+                <th data-day="2">Tuesday</th>
+                <th data-day="3">Wednesday</th>
+                <th data-day="4">Thursday</th>
+                <th data-day="5">Friday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="time">08:00 - 10:00</td>
+                <td>Work</td>
+                <td>Work</td>
+                <td>Study</td>
+                <td>Work</td>
+                <td>Work</td>
+            </tr>
+            <tr>
+                <td class="time">10:00 - 12:00</td>
+                <td>Meeting</td>
+                <td>Work</td>
+                <td>Work</td>
+                <td>Meeting</td>
+                <td>Work</td>
+            </tr>
+            <tr>
+                <td class="time">12:00 - 14:00</td>
+                <td>Lunch</td>
+                <td>Lunch</td>
+                <td>Lunch</td>
+                <td>Lunch</td>
+                <td>Lunch</td>
+            </tr>
+            <tr>
+                <td class="time">14:00 - 16:00</td>
+                <td>Study</td>
+                <td>Gym</td>
+                <td>Project</td>
+                <td>Study</td>
+                <td>Free</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
