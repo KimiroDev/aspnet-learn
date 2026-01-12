@@ -65,7 +65,7 @@
 <script>
     async function loadBattery() {
         try {
-            const response = await fetch("http://localhost:5257/system/battery");
+            const response = await fetch("0.0.0.0:5257/system/battery");
             if (!response.ok) throw new Error("Failed to fetch battery");
 
             const data = await response.json();
