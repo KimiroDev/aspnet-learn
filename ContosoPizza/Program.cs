@@ -41,7 +41,7 @@ app.MapPost("/deploy", async (HttpRequest request) =>
         RedirectStandardOutput = true,
         RedirectStandardError = true,
         UseShellExecute = false
-    };
+    }; 
 
     var p = Process.Start(psi);
     var output = await p.StandardOutput.ReadToEndAsync();
