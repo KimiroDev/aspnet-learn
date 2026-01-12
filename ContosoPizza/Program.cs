@@ -34,18 +34,22 @@ app.MapRazorPages();
 
 app.MapPost("/deploy", async (HttpRequest request) =>
 {
-    // OPTIONAL: verify GitHub signature here
-
-    var process = new Process
+    var psi = new ProcessStartInfo
     {
-        StartInfo = new ProcessStartInfo
-        {
-            FileName = "/home/student/deploy.sh",
-            UseShellExecute = false
-        }
+        FileName = "/bin/bash",
+        Arguments = "/home/student/deploy.sh",
+        RedirectStandardOutput = true,
+        RedirectStandardError = true,
+        UseShellExecute = false
     };
 
-    process.Start();
+    var p = Process.Start(psi);
+    var output = await p.StandardOutput.ReadToEndAsync();
+    var error  = await p.StandardError.ReadToEndAsync();
+
+    await File.WriteAllTextAsync("/tmp/deploy.out", output);
+    await File.WriteAllTextAsync("/tmp/deploy.err", error);
+
     return Results.Ok("Deploy triggered");
 });
 
