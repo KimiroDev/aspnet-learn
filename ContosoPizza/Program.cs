@@ -13,6 +13,14 @@ builder.Services.AddDbContext<PizzaContext>(options =>
 
 builder.Services.AddScoped<PizzaService>();
 
+// Battery
+if (OperatingSystem.IsLinux())
+    builder.Services.AddSingleton<IBatteryService, LinuxBatteryService>();
+else if (OperatingSystem.IsWindows())
+    builder.Services.AddSingleton<IBatteryService, WindowsBatteryService>();
+else
+    builder.Services.AddSingleton<IBatteryService, UnknownBatteryService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,6 +59,11 @@ app.MapPost("/deploy", async (HttpRequest request) =>
     await File.WriteAllTextAsync("/tmp/deploy.err", error);
 
     return Results.Ok("Deploy triggered");
+});
+
+app.MapGet("/system/battery", (IBatteryService battery) =>
+{
+    return Results.Ok(battery.GetStatus());
 });
 
 app.Run();
