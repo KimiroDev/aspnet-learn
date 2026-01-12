@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using ContosoPizza.Data;
 using ContosoPizza.Services;
 
@@ -30,5 +31,22 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapPost("/deploy", async (HttpRequest request) =>
+{
+    // OPTIONAL: verify GitHub signature here
+
+    var process = new Process
+    {
+        StartInfo = new ProcessStartInfo
+        {
+            FileName = "/home/student/deploy.sh",
+            UseShellExecute = false
+        }
+    };
+
+    process.Start();
+    return Results.Ok("Deploy triggered");
+});
 
 app.Run();
