@@ -37,7 +37,7 @@
             <tr>
                 <td class="time">10:00 - 12:00</td>
                 <td>Intalnire1</td>
-                <td>Work</td>
+                <td>Intalnire2</td>
                 <td>Work</td>
                 <td>Meeting</td>
                 <td>Work</td>
@@ -65,7 +65,7 @@
 <script>
     async function loadBattery() {
         try {
-            const response = await fetch("0.0.0.0:5257/system/battery");
+            const response = await fetch("http://127.0.0.1:5257/system/battery");
             if (!response.ok) throw new Error("Failed to fetch battery");
 
             const data = await response.json();
