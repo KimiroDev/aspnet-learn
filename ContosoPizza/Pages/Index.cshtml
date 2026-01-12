@@ -1,5 +1,7 @@
 ﻿@page
 @model IndexModel
+@inject IBatteryService BatteryService
+
 @{
     ViewData["Title"] = "Ceva cu pizza";
     TimeSpan daysinbuisniess = DateTime.Now - new DateTime(2018, 8, 14);
@@ -12,6 +14,21 @@
 
     <div id="battery-container">
         <p>Battery level: <span id="battery-level">Loading...</span>%</p>
+    </div>
+
+    <div id="razor-battery-container">
+        <p>Battery level: <span id="razor-battery-level">
+            @{
+                var status = BatteryService.GetStatus();
+                if (status.Percentage.HasValue)
+                {
+                    @status.Percentage
+                }
+                else
+                {
+                    @:N.A.
+                }
+            }</span>%</p>
     </div>
 
     <table>
