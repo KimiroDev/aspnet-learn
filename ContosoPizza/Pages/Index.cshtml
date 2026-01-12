@@ -71,7 +71,7 @@
             const data = await response.json();
             document.getElementById("battery-level").textContent = data.batteryLevel;
         } catch (err) {
-            document.getElementById("battery-level").textContent = "Unavailable";
+            document.getElementById("battery-level").textContent = "Cannot fetch";
             console.error(err);
         }
     }
